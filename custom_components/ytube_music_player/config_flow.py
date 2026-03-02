@@ -144,7 +144,7 @@ async def async_common_step_oauth(self, user_input=None, option_flow = False):  
 				self.data[CONF_HEADER_PATH] = os.path.join(self.hass.config.path(STORAGE_DIR),DEFAULT_HEADER_FILENAME+self.data[CONF_NAME].replace(' ','_')+'.json')
 				return self.async_show_form(step_id="finish", data_schema=vol.Schema(await async_create_form(self.hass,self.data,3, option_flow)), errors=self._errors, description_placeholders={"github_url": "https://github.com/KoljaWindeler/ytube_music_player", "google_console_url": "https://console.cloud.google.com/apis/credentials" })
 			
-	return self.async_show_form(step_id="oauth2", data_schema=vol.Schema(await async_create_form(self.hass,user_input,1, option_flow)), errors=self._errors)
+	return self.async_show_form(step_id="oauth2", data_schema=vol.Schema(await async_create_form(self.hass,user_input,1, option_flow)), errors=self._errors, description_placeholders={"ytubeapi_url": "https://ytmusicapi.readthedocs.io/en/stable/setup/browser.html"})
 
 
 async def async_common_step_oauth2(self, user_input=None, option_flow = False):   # pylint: disable=unused-argument
@@ -160,7 +160,7 @@ async def async_common_step_oauth2(self, user_input=None, option_flow = False): 
 		self.data[CONF_CODE] = self.code
 	except:
 		self._errors["base"] = ERROR_OAUTH
-		return self.async_show_form(step_id="oauth2", data_schema=vol.Schema(await async_create_form(self.hass,self.data,1, option_flow)), errors=self._errors)
+		return self.async_show_form(step_id="oauth2", data_schema=vol.Schema(await async_create_form(self.hass,self.data,1, option_flow)), errors=self._errors, description_placeholders={"ytubeapi_url": "https://ytmusicapi.readthedocs.io/en/stable/setup/browser.html"})
 
 #		OAUTH
 	return self.async_show_form(step_id="oauth3", data_schema=vol.Schema(await async_create_form(self.hass,self.data,2, option_flow)), errors=self._errors)
